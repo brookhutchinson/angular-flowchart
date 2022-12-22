@@ -1,19 +1,20 @@
-/* You can add global styles to this file, and also import other style files */
+/* Add global styles to this file */
 html,
 body {
   height: 100%;
 }
+
 body {
   margin: 0;
   font-family: Roboto, "Poppins", sans-serif;
 }
 
 .ngflowchart-step-wrapper[ngflowchart-drop-hover]::after {
-  background: #a3e798 !important;
+  background: #A3E798 !important;
 }
 
 .ngflowchart-step-wrapper[ngflowchart-drop-hover]::before {
-  background: #4cd137 !important;
+  background: #4CD137 !important;
 }
 
 .ngflowchart-arrow {
@@ -27,12 +28,12 @@ body {
 }
 
 .step {
-  background: #fbfbfb;
-  color: #444;
   display: flex;
-  flex-direction: column;
+  background: #FBFBFB;
   border-radius: 4px;
-  padding: 1em;
-  min-width: 200px;
+  color: #444;
+  flex-direction: column;
   min-height: 100px;
+  min-width: 200px;
+  padding: 1em;
 }
