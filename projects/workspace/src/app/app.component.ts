@@ -20,6 +20,9 @@ import { NgFlowchart } from 'projects/ng-flowchart/src/lib/model/flow.model';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+  @ViewChild('normalStep') normalStepTemplate: TemplateRef<any>;
+  @ViewChild(NgFlowchartCanvasDirective) canvas: NgFlowchartCanvasDirective;
+
   title = 'workspace';
 
   callbacks: NgFlowchart.Callbacks = {};
@@ -31,8 +34,6 @@ export class AppComponent {
       mode: 'DISABLED'
     }
   }
-
-  @ViewChild('normalStep') normalStepTemplate: TemplateRef<any>;
 
   sampleJson = '{"root":{"id":"s1624206175876","type":"nested-flow","data":{"name":"Nested Flow","nested":{"root":{"id":"s1624206177187","type":"log","data":{"name":"Log","icon":{"name":"log-icon","color":"blue"},"config":{"message":null,"severity":null}},"children":[{"id":"s1624206178618","type":"log","data":{"name":"Log","icon":{"name":"log-icon","color":"blue"},"config":{"message":null,"severity":null}},"children":[]},{"id":"s1624206180286","type":"log","data":{"name":"Log","icon":{"name":"log-icon","color":"blue"},"config":{"message":null,"severity":null}},"children":[]}]}}},"children":[{"id":"s1624206181654","type":"log","data":{"name":"Log","icon":{"name":"log-icon","color":"blue"},"config":{"message":null,"severity":null}},"children":[]}]}}';
 
@@ -82,11 +83,11 @@ export class AppComponent {
     }
   ];
 
-  @ViewChild(NgFlowchartCanvasDirective) canvas: NgFlowchartCanvasDirective;
-
   disabled = false;
 
-  constructor(private stepRegistry: NgFlowchartStepRegistry) {
+  constructor(
+    private stepRegistry: NgFlowchartStepRegistry
+  ) {
     this.callbacks.onDropError = this.onDropError;
     this.callbacks.onMoveError = this.onMoveError;
     this.callbacks.afterDeleteStep = this.afterDeleteStep;
@@ -111,11 +112,11 @@ export class AppComponent {
   }
 
   beforeDeleteStep(step) {
-    console.log(JSON.stringify(step.children))
+    console.log(JSON.stringify(step.children));
   }
 
   afterDeleteStep(step) {
-    console.log(JSON.stringify(step.children))
+    console.log(JSON.stringify(step.children));
   }
 
   showUpload() {
