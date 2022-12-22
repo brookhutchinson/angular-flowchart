@@ -43,7 +43,10 @@ export class AppComponent {
       type: 'log',
       data: {
         name: 'Log',
-        icon: { name: 'log-icon', color: 'blue' },
+        icon: {
+          name: 'log-icon',
+          color: 'blue'
+        },
         config: {
           message: null,
           severity: null
@@ -103,24 +106,42 @@ export class AppComponent {
     this.stepRegistry.registerStep('route-step', RouteStepComponent);
   }
 
-  onDropError(error: NgFlowchart.DropError) {
-    console.log(error);
-  }
-
-  onMoveError(error: NgFlowchart.MoveError) {
-    console.log(error);
+  afterDeleteStep(step) {
+    console.log(JSON.stringify(step.children));
   }
 
   beforeDeleteStep(step) {
     console.log(JSON.stringify(step.children));
   }
 
-  afterDeleteStep(step) {
-    console.log(JSON.stringify(step.children));
+  clearData() {
+    this.canvas.getFlow().clear();
   }
 
-  showUpload() {
-    this.canvas.getFlow().upload(this.sampleJson);
+  onDelete(id: number) {
+    this.canvas.getFlow().getStep(id).destroy(true);
+  }
+
+  onDropError(error: NgFlowchart.DropError) {
+    console.log(error);
+  }
+
+  onGapChanged(event) {
+    this.options = {
+      ...this.options,
+      stepGap: parseInt(event.target.value)
+    };
+  }
+
+  onMoveError(error: NgFlowchart.MoveError) {
+    console.log(error);
+  }
+
+  onSequentialChange(event) {
+    this.options = {
+      ...this.options,
+      isSequential: event.target.checked
+    }
   }
 
   showFlowData() {
@@ -132,25 +153,7 @@ export class AppComponent {
     x.document.close();
   }
 
-  clearData() {
-    this.canvas.getFlow().clear();
-  }
-
-  onGapChanged(event) {
-    this.options = {
-      ...this.options,
-      stepGap: parseInt(event.target.value)
-    };
-  }
-
-  onSequentialChange(event) {
-    this.options = {
-      ...this.options,
-      isSequential: event.target.checked
-    }
-  }
-
-  onDelete(id) {
-    this.canvas.getFlow().getStep(id).destroy(true);
+  showUpload() {
+    this.canvas.getFlow().upload(this.sampleJson);
   }
 }
