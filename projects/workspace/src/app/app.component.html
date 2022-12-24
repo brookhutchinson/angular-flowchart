@@ -1,29 +1,13 @@
 <main>
-  <div
-    id="canvas"
-    ngFlowchartCanvas
-    [ngFlowchartOptions]="options"
-    [ngFlowchartCallbacks]="callbacks"
-    [disabled]="disabled"    
-  ></div>
+  <div id="canvas" ngFlowchartCanvas [disabled]="disabled" [ngFlowchartCallbacks]="callbacks" [ngFlowchartOptions]="options"></div>
+
   <div id="palette">
     <section>
-      <div
-        class="plugin-op"
-        *ngFor="let item of items"
-        [ngFlowchartStep]="{
-          template: normalStep,
-          type: item.type,
-          data: item.data
-        }"
-      >
+      <div *ngFor="let item of items" class="plugin-op" [ngFlowchartStep]="{ template: normalStep, type: item.type, data: item.data }">
         <span>{{ item.name }}</span>
       </div>
-      <div
-        class="plugin-op"
-        *ngFor="let op of customOps"
-        [ngFlowchartStep]="op.step"
-      >
+
+      <div *ngFor="let op of customOps" class="plugin-op" [ngFlowchartStep]="op.step">
         <span>{{ op.paletteName }}</span>
       </div>
     </section>
@@ -32,47 +16,34 @@
       <button (click)="showFlowData()">Show JSON</button>
       <button (click)="showUpload()">Upload JSON</button>
     </section>
+
     <section>
       <div class="sub-section">
-        <label for="step-gap-select" class="wide">Step Gap</label>
-        <select
-          name="step-gap-select"
-          id="step-gap-select"
-          class="wide"
-          (change)="onGapChanged($event)"
-        >
+        <label class="wide" for="step-gap-select">Step Gap</label>
+        <select class="wide" id="step-gap-select" name="step-gap-select" (change)="onGapChanged($event)">
           <option value="30">30</option>
           <option value="40" selected>40</option>
           <option value="60">60</option>
         </select>
       </div>
+
       <div class="sub-section">
         <label for="sequential">Sequential</label>
-        <input
-          type="checkbox"
-          name="sequential"
-          (change)="onSequentialChange($event)"
-        />
+        <input type="checkbox" name="sequential" (change)="onSequentialChange($event)">
       </div>
+
       <div class="sub-section">
         <label for="disabled">Disabled</label>
-        <input
-          type="checkbox"
-          name="disabled"
-          (change)="disabled = $event.target.checked"
-        />
+        <input type="checkbox" name="disabled" (change)="disabled = $event.target.checked">
       </div>
     </section>
+
     <section>
       <button (click)="clearData()">Clear Flow</button>
     </section>
+
     <ng-template #normalStep let-data>
-      <div
-        class="card"
-        [attr.name]="data.data.name"
-        #card
-        (click)="onDelete(data.id)"
-      >
+      <div class="card" [attr.name]="data.data.name" (click)="onDelete(data.id)" #card>
         <span>{{ data.data.name }}</span>
       </div>
     </ng-template>

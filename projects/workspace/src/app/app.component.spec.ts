@@ -1,4 +1,7 @@
+// angular
 import { TestBed } from '@angular/core/testing';
+
+// components
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
@@ -6,7 +9,7 @@ describe('AppComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [
         AppComponent
-      ],
+      ]
     }).compileComponents();
   });
 
@@ -16,7 +19,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'workspace'`, () => {
+  it(`should have as title as 'workspace'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app.title).toEqual('workspace');
