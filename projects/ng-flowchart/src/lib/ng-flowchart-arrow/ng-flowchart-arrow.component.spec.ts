@@ -1,5 +1,7 @@
+// angular
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+// components
 import { NgFlowchartArrowComponent } from './ng-flowchart-arrow.component';
 
 describe('NgFlowchartArrowComponent', () => {
@@ -8,9 +10,11 @@ describe('NgFlowchartArrowComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NgFlowchartArrowComponent ]
-    })
-    .compileComponents();
+      declarations: [
+        // components
+        NgFlowchartArrowComponent
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +23,7 @@ describe('NgFlowchartArrowComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create NgFlowchartComponent', () => {
     expect(component).toBeTruthy();
   });
 });
