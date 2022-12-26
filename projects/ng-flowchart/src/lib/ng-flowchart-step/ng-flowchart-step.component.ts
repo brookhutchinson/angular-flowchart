@@ -1,9 +1,21 @@
-import { Component, ComponentRef, ElementRef, EventEmitter, HostListener, Input, Output, TemplateRef, ViewChild, ViewContainerRef, ViewEncapsulation } from '@angular/core';
-import { NgFlowchart } from '../model/flow.model';
-import { CONSTANTS } from '../model/flowchart.constants';
+// angular
+import { Component } from '@angular/core';
+import { ViewEncapsulation } from '@angular/core';
+import { EventEmitter, HostListener, Input, Output, ViewChild } from '@angular/core';
+import { ComponentRef, ElementRef, TemplateRef, ViewContainerRef } from '@angular/core';
+
+// components
 import { NgFlowchartArrowComponent } from '../ng-flowchart-arrow/ng-flowchart-arrow.component';
-import { NgFlowchartCanvasService } from '../ng-flowchart-canvas.service';
+
+// services
 import { DropDataService } from '../services/dropdata.service';
+import { NgFlowchartCanvasService } from '../ng-flowchart-canvas.service';
+
+// interfaces
+import { NgFlowchart } from '../model/flow.model';
+
+// contants
+import { CONSTANTS } from '../model/flowchart.constants';
 
 export type AddChildOptions = {
   /** Should the child be added as a sibling to existing children, if false the existing children will be reparented to this new child.
@@ -11,7 +23,7 @@ export type AddChildOptions = {
    * */
   sibling?: boolean,
   /** The index of the child. Only used when sibling is true.
-   * Defaults to the end of the child array. 
+   * Defaults to the end of the child array.
    */
   index?: number
 }
@@ -144,7 +156,7 @@ export class NgFlowchartStepComponent<T = any> {
   /**
    * Creates and adds a child to this step
    * @param template The template or component type to create
-   * @param options Add options 
+   * @param options Add options
    */
   async addChild(pending: NgFlowchart.PendingStep, options: AddChildOptions): Promise<NgFlowchartStepComponent | null> {
 
@@ -166,15 +178,15 @@ export class NgFlowchartStepComponent<T = any> {
 
   /**
    * Destroys this step component and updates all necessary child and parent relationships
-   * @param recursive 
-   * @param checkCallbacks 
+   * @param recursive
+   * @param checkCallbacks
    */
   destroy(recursive: boolean = true, checkCallbacks: boolean = true): boolean {
 
     if (!checkCallbacks || this.canDeleteStep()) {
-      this.canvas.options.callbacks.beforeDeleteStep && 
+      this.canvas.options.callbacks.beforeDeleteStep &&
       this.canvas.options.callbacks.beforeDeleteStep(this)
-      
+
       let parentIndex;
       if (this._parent) {
         parentIndex = this._parent.removeChild(this);
@@ -184,7 +196,7 @@ export class NgFlowchartStepComponent<T = any> {
 
       this.canvas.reRender();
 
-      this.canvas.options.callbacks.afterDeleteStep && 
+      this.canvas.options.callbacks.afterDeleteStep &&
       this.canvas.options.callbacks.afterDeleteStep(this)
 
       return true;
@@ -297,7 +309,7 @@ export class NgFlowchartStepComponent<T = any> {
   }
 
   /**
-   * Return current rect of this step. The position can be animated so getBoundingClientRect cannot 
+   * Return current rect of this step. The position can be animated so getBoundingClientRect cannot
    * be reliable for positions
    * @param canvasRect Optional canvasRect to provide to offset the values
    */
@@ -419,7 +431,7 @@ export class NgFlowchartStepComponent<T = any> {
   private destroy0(parentIndex, recursive: boolean = true) {
 
     this.compRef.destroy();
-    
+
     // remove from master array
     this.canvas.flow.removeStep(this)
 

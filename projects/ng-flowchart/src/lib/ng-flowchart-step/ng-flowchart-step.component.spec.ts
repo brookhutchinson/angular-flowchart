@@ -1,5 +1,7 @@
+// angular
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+// component
 import { NgFlowchartStepComponent } from './ng-flowchart-step.component';
 
 describe('NgFlowchartStepComponent', () => {
@@ -8,9 +10,11 @@ describe('NgFlowchartStepComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NgFlowchartStepComponent ]
-    })
-    .compileComponents();
+      declarations: [
+        // components
+        NgFlowchartStepComponent
+      ]
+    }).compileComponents();
   });
 
   beforeEach(() => {
