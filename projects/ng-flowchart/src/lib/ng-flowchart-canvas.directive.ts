@@ -70,7 +70,7 @@ export class NgFlowchartCanvasDirective implements OnInit, AfterViewInit, OnDest
   @HostListener('wheel', ['$event'])
   protected onZoom(event) {
     if (this._options.zoom.mode === 'WHEEL') {
-      this.adjustWheelScale(event)
+      this.adjustWheelScale(event);
     }
   }
 
@@ -87,7 +87,7 @@ export class NgFlowchartCanvasDirective implements OnInit, AfterViewInit, OnDest
   }
 
   get options() {
-    return this._options
+    return this._options;
   }
 
   @Input('disabled')
@@ -132,7 +132,7 @@ export class NgFlowchartCanvasDirective implements OnInit, AfterViewInit, OnDest
 
   ngOnDestroy() {
     for (let i = 0; i < this.viewContainer.length; i++) {
-      this.viewContainer.remove(i)
+      this.viewContainer.remove(i);
     }
 
     this.canvasEle.nativeElement.remove();
