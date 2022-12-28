@@ -134,8 +134,7 @@ export class NgFlowchartStepComponent<T = any> {
 
       this.destroy0(parentIndex, recursive);
       this.canvas.reRender();
-      this.canvas.options.callbacks.afterDeleteStep &&
-      this.canvas.options.callbacks.afterDeleteStep(this)
+      this.canvas.options.callbacks.afterDeleteStep && this.canvas.options.callbacks.afterDeleteStep(this);
 
       return true;
     }
@@ -281,7 +280,7 @@ export class NgFlowchartStepComponent<T = any> {
       }
     }
 
-    // finally reset this nodes to children to the single new child
+    // reset this nodes to children to the single new child
     this.setChildren([newChild]);
     return true;
   }
@@ -355,7 +354,10 @@ export class NgFlowchartStepComponent<T = any> {
 
   async onUpload(data: T) {}
 
-  private destroy0(parentIndex, recursive: boolean = true) {
+  private destroy0(
+    parentIndex,
+    recursive: boolean = true
+  ) {
     this.compRef.destroy();
 
     // remove from master array
