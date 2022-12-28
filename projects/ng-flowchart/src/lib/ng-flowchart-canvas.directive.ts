@@ -152,8 +152,8 @@ export class NgFlowchartCanvasDirective implements OnInit, OnDestroy {
     if (this.canvas.flow.hasRoot()) {
       event.preventDefault();
 
-      // scale down / zoom out
       if (event.deltaY > 0) {
+        // scale down / zoom out
         this.scaleDown();
       } else if (event.deltaY < 0) {
         // scale up / zoom in
