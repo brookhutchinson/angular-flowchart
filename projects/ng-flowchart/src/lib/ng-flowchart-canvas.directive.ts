@@ -1,5 +1,5 @@
 // angular
-import { Directive, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Directive, OnInit, OnDestroy } from '@angular/core';
 import { HostBinding, HostListener, Input } from '@angular/core';
 import { ElementRef, ViewContainerRef } from '@angular/core';
 
@@ -24,7 +24,7 @@ import { CONSTANTS } from './model/flowchart.constants';
     StepManagerService
   ]
 })
-export class NgFlowchartCanvasDirective implements OnInit, AfterViewInit, OnDestroy {
+export class NgFlowchartCanvasDirective implements OnInit, OnDestroy {
   @HostListener('drop', ['$event'])
   protected onDrop(event: DragEvent) {
     if (this._disabled) {
@@ -86,10 +86,6 @@ export class NgFlowchartCanvasDirective implements OnInit, AfterViewInit, OnDest
     this.canvas.reRender();
   }
 
-  get options() {
-    return this._options;
-  }
-
   @Input('disabled')
   @HostBinding('attr.disabled')
   set disabled(val: boolean) {
@@ -97,10 +93,6 @@ export class NgFlowchartCanvasDirective implements OnInit, AfterViewInit, OnDest
     if (this.canvas) {
       this.canvas._disabled = this._disabled;
     }
-  }
-
-  get disabled() {
-    return this._disabled;
   }
 
   private _disabled: boolean = false;
@@ -128,8 +120,6 @@ export class NgFlowchartCanvasDirective implements OnInit, AfterViewInit, OnDest
     this.canvas._disabled = this._disabled;
   }
 
-  ngAfterViewInit() {}
-
   ngOnDestroy() {
     for (let i = 0; i < this.viewContainer.length; i++) {
       this.viewContainer.remove(i);
@@ -138,17 +128,6 @@ export class NgFlowchartCanvasDirective implements OnInit, AfterViewInit, OnDest
     this.canvasEle.nativeElement.remove();
     this.viewContainer.element.nativeElement.remove();
     this.viewContainer = undefined;
-  }
-
-  private createCanvasContent(viewContainer: ViewContainerRef): HTMLElement {
-    let canvasEle = viewContainer.element.nativeElement as HTMLElement;
-    let canvasContent = document.createElement('div');
-    const canvasId = 'c' + Date.now();
-
-    canvasContent.id = canvasId;
-    canvasContent.classList.add(CONSTANTS.CANVAS_CONTENT_CLASS);
-    canvasEle.appendChild(canvasContent);
-    return canvasContent;
   }
 
   // return the flow object representing this flow chart
@@ -181,5 +160,24 @@ export class NgFlowchartCanvasDirective implements OnInit, AfterViewInit, OnDest
         this.scaleUp();
       }
     }
+  }
+
+  private createCanvasContent(viewContainer: ViewContainerRef): HTMLElement {
+    let canvasEle = viewContainer.element.nativeElement as HTMLElement;
+    let canvasContent = document.createElement('div');
+    const canvasId = 'c' + Date.now();
+
+    canvasContent.id = canvasId;
+    canvasContent.classList.add(CONSTANTS.CANVAS_CONTENT_CLASS);
+    canvasEle.appendChild(canvasContent);
+    return canvasContent;
+  }
+
+  get disabled() {
+    return this._disabled;
+  }
+
+  get options() {
+    return this._options;
   }
 }
