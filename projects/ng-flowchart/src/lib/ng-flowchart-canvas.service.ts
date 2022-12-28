@@ -1,10 +1,18 @@
-import { ComponentRef, Injectable, ViewContainerRef } from '@angular/core';
-import { NgFlowchart } from './model/flow.model';
+// angular
+import { Injectable } from '@angular/core';
+import { ComponentRef, ViewContainerRef } from '@angular/core';
+
+// components
 import { NgFlowchartStepComponent } from './ng-flowchart-step/ng-flowchart-step.component';
+
+// services
 import { CanvasRendererService } from './services/canvas-renderer.service';
 import { DropDataService as DragService } from './services/dropdata.service';
 import { OptionsService } from './services/options.service';
 import { StepManagerService } from './services/step-manager.service';
+
+// interfaces
+import { NgFlowchart } from './model/flow.model';
 
 type DropResponse = {
   added: boolean;
