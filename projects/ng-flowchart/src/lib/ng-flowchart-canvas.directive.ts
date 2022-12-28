@@ -1,12 +1,19 @@
-import { AfterViewInit, Directive, ElementRef, HostBinding, HostListener, Input, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
-import { NgFlowchart } from './model/flow.model';
-import { CONSTANTS } from './model/flowchart.constants';
-import { NgFlowchartCanvasService } from './ng-flowchart-canvas.service';
+// angular
+import { Directive, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { HostBinding, HostListener, Input } from '@angular/core';
+import { ElementRef, ViewContainerRef } from '@angular/core';
+
+// services
 import { CanvasRendererService } from './services/canvas-renderer.service';
+import { NgFlowchartCanvasService } from './ng-flowchart-canvas.service';
 import { OptionsService } from './services/options.service';
 import { StepManagerService } from './services/step-manager.service';
 
+// interfaces
+import { NgFlowchart } from './model/flow.model';
 
+// contansts
+import { CONSTANTS } from './model/flowchart.constants';
 
 @Directive({
     selector: '[ngFlowchartCanvas]',
@@ -160,7 +167,7 @@ export class NgFlowchartCanvasDirective implements OnInit, OnDestroy, AfterViewI
     }
 
     public setScale(scaleValue: number) {
-        
+
         const scaleVal = Math.max(0, scaleValue)
         this.canvas.setScale(scaleVal)
     }
