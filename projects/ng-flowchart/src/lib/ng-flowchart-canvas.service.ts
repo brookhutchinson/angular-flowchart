@@ -319,16 +319,20 @@ export class NgFlowchartCanvasService {
       case 'ABOVE':
         response = this.placeStepAbove(step, dropTarget.step);
         break;
+
       case 'BELOW':
         response = this.placeStepBelow(step, dropTarget.step);
         console.log(response, [...dropTarget.step.children]);
         break;
+
       case 'LEFT':
         response = this.placeStepAdjacent(step, dropTarget.step, true);
         break;
+
       case 'RIGHT':
         response = this.placeStepAdjacent(step, dropTarget.step, false);
         break;
+
       default:
         break;
     }
@@ -336,6 +340,7 @@ export class NgFlowchartCanvasService {
     if (!isMove && response.added) {
       this.flow.addStep(step);
     }
+
     return response;
   }
 
@@ -345,7 +350,7 @@ export class NgFlowchartCanvasService {
     isLeft: boolean = true
   ): DropResponse {
     if (siblingStep.parent) {
-      //find the adjacent steps index in the parents child array
+      // find the adjacent steps index in the parents child array
       const adjacentIndex = siblingStep.parent.children.findIndex(
         (child) => child.nativeElement.id == siblingStep.nativeElement.id
       );
@@ -359,12 +364,13 @@ export class NgFlowchartCanvasService {
 
       return {
         added: false,
-        prettyRender: false,
+        prettyRender: false
       };
     }
+
     return {
       added: true,
-      prettyRender: false,
+      prettyRender: false
     };
   }
 
@@ -374,6 +380,7 @@ export class NgFlowchartCanvasService {
   ): DropResponse {
     let prettyRender = false;
     let newParent = childStep.parent;
+
     if (newParent) {
       // we want to remove child and insert our newStep at the same index
       let index = newParent.removeChild(childStep);
@@ -387,7 +394,6 @@ export class NgFlowchartCanvasService {
       // if the new step was a direct child of the root step, we need to break that connection
       childStep.removeChild(newStep);
       this.setRoot(newStep);
-
       prettyRender = true;
     }
 
@@ -407,7 +413,10 @@ export class NgFlowchartCanvasService {
     };
   }
 
-  private setRoot(step: NgFlowchartStepComponent, force: boolean = true) {
+  private setRoot(
+    step: NgFlowchartStepComponent,
+    force: boolean = true
+  ) {
     if (this.flow.hasRoot()) {
       if (!force) {
         console.warn('Already have a root and force is false');
@@ -428,8 +437,8 @@ export class NgFlowchartCanvasService {
   private dropError(error: NgFlowchart.ErrorMessage) {
     if (this.options.callbacks?.onDropError) {
       let parent = this.currentDropTarget?.position !== 'BELOW'
-          ? this.currentDropTarget?.step.parent
-          : this.currentDropTarget?.step;
+        ? this.currentDropTarget?.step.parent
+        : this.currentDropTarget?.step;
 
       this.options.callbacks.onDropError({
         step: this.drag.dragStep as NgFlowchart.PendingStep,
@@ -439,11 +448,14 @@ export class NgFlowchartCanvasService {
     }
   }
 
-  private moveError(step: NgFlowchartStepComponent, error) {
+  private moveError(
+    step: NgFlowchartStepComponent,
+    error
+  ) {
     if (this.options.callbacks?.onMoveError) {
       let parent = this.currentDropTarget?.position !== 'BELOW'
-          ? this.currentDropTarget?.step.parent
-          : this.currentDropTarget?.step;
+        ? this.currentDropTarget?.step.parent
+        : this.currentDropTarget?.step;
 
       this.options.callbacks.onMoveError({
         step: {
