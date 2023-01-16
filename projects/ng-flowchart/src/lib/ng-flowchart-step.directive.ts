@@ -12,30 +12,25 @@ import { NgFlowchart } from './model/flow.model';
   selector: '[ngFlowchartStep]'
 })
 export class NgFlowchartStepDirective implements AfterViewInit {
+  @HostListener('dragstart', ['$event'])
+  onDragStart(event: DragEvent) {
+    this.data.setDragStep(this.flowStep);
+    event.dataTransfer.setData('type', 'FROM_PALETTE');
+  }
 
-    @HostListener('dragstart', ['$event'])
-    onDragStart(event: DragEvent) {
-        this.data.setDragStep(this.flowStep);
-        event.dataTransfer.setData('type', 'FROM_PALETTE');
-    }
+  @HostListener('dragend', ['$event'])
+  onDragEnd(event: DragEvent) {
+    this.data.setDragStep(null);
+  }
 
-    @HostListener('dragend', ['$event'])
-    onDragEnd(event: DragEvent) {
+  @Input('ngFlowchartStep') flowStep: NgFlowchart.PendingStep;
 
-        this.data.setDragStep(null);
+  constructor(
+    protected element: ElementRef<HTMLElement>,
+    private data: DropDataService
+  ) {
+    this.element.nativeElement.setAttribute('draggable', 'true');
+  }
 
-    }
-
-    @Input('ngFlowchartStep')
-    flowStep: NgFlowchart.PendingStep;
-
-    constructor(
-        protected element: ElementRef<HTMLElement>,
-        private data: DropDataService
-    ) {
-        this.element.nativeElement.setAttribute('draggable', 'true');
-    }
-
-    ngAfterViewInit() {
-    }
+  ngAfterViewInit() {}
 }
