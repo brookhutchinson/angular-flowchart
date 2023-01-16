@@ -1,9 +1,15 @@
-import { AfterViewInit, Directive, ElementRef, HostListener, Input } from '@angular/core';
-import { NgFlowchart } from './model/flow.model';
+// angular
+import { Directive, AfterViewInit } from '@angular/core';
+import { ElementRef, HostListener, Input } from '@angular/core';
+
+// services
 import { DropDataService } from './services/dropdata.service';
 
+// interfaces
+import { NgFlowchart } from './model/flow.model';
+
 @Directive({
-    selector: '[ngFlowchartStep]'
+  selector: '[ngFlowchartStep]'
 })
 export class NgFlowchartStepDirective implements AfterViewInit {
 
@@ -15,9 +21,9 @@ export class NgFlowchartStepDirective implements AfterViewInit {
 
     @HostListener('dragend', ['$event'])
     onDragEnd(event: DragEvent) {
-        
+
         this.data.setDragStep(null);
-       
+
     }
 
     @Input('ngFlowchartStep')
