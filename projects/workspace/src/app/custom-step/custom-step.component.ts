@@ -1,7 +1,12 @@
+// angular
 import { Component } from '@angular/core';
+
+// components
 import { NgFlowchartStepComponent } from 'projects/ng-flowchart/src/lib/ng-flowchart-step/ng-flowchart-step.component';
-import { NgFlowchart } from 'projects/ng-flowchart/src';
 import { RouteStepComponent } from './route-step/route-step.component';
+
+// interfaces
+import { NgFlowchart } from 'projects/ng-flowchart/src';
 
 @Component({
   selector: 'app-custom-step',
@@ -9,11 +14,9 @@ import { RouteStepComponent } from './route-step/route-step.component';
   styleUrls: ['./custom-step.component.scss']
 })
 export class CustomStepComponent extends NgFlowchartStepComponent {
-
   routes = [];
 
-  ngOnInit(): void {
-  }
+  ngOnInit() {}
 
   canDrop(dropEvent: NgFlowchart.DropTarget): boolean {
     return true;
@@ -26,8 +29,7 @@ export class CustomStepComponent extends NgFlowchartStepComponent {
   getDropPositionsForStep(pendingStep: NgFlowchart.PendingStep): NgFlowchart.DropPosition[] {
     if (pendingStep.template !== RouteStepComponent) {
       return ['ABOVE', 'LEFT', 'RIGHT'];
-    }
-    else {
+    } else {
       return ['BELOW'];
     }
   }
