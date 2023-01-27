@@ -1,14 +1,4 @@
-<div
-    class="nested-flow-step"
-    #canvasContent
->
-    <span>{{ data.name }}</span>
-    <div
-        ngFlowchartCanvas
-        [ngFlowchartOptions]="options"
-        [ngFlowchartCallbacks]="callbacks"
-        class="nested-canvas-content"
-    >
-
-    </div>
+<div class="nested-flow-step" #canvasContent>
+  <span>{{ data.name }}</span>
+  <div class="nested-canvas-content" ngFlowchartCanvas [ngFlowchartCallbacks]="callbacks" [ngFlowchartOptions]="options"></div>
 </div>
