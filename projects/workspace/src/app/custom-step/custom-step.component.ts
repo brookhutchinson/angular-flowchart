@@ -40,21 +40,24 @@ export class CustomStepComponent extends NgFlowchartStepComponent {
       condition: '',
       sequence: null
     }
+
     let index = this.routes.push(route);
     route.sequence = index;
 
-    this.addChild({
-      template: RouteStepComponent,
-      type: 'route-step',
-      data: route
-    }, {
-      sibling: true
-    });
+    this.addChild(
+      {
+        template: RouteStepComponent,
+        type: 'route-step',
+        data: route
+      },
+      {
+        sibling: true
+      }
+    );
   }
 
   delete() {
-    //recursively delete
+    // recursively delete
     this.destroy(true);
   }
-
 }
