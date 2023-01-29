@@ -1,5 +1,15 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { NgFlowchart, NgFlowchartCanvasDirective, NgFlowchartStepComponent } from 'projects/ng-flowchart/src';
+// angular
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { ElementRef, ViewChild } from '@angular/core';
+
+// components
+import { NgFlowchartStepComponent } from 'projects/ng-flowchart/src';
+
+// directives
+import { NgFlowchartCanvasDirective } from 'projects/ng-flowchart/src';
+
+// interfaaces
+import { NgFlowchart } from 'projects/ng-flowchart/src';
 
 export type NestedData = {
   nested: any
@@ -11,12 +21,9 @@ export type NestedData = {
   styleUrls: ['./nested-flow.component.scss']
 })
 export class NestedFlowComponent extends NgFlowchartStepComponent implements OnInit, OnDestroy, AfterViewInit {
+  @ViewChild(NgFlowchartCanvasDirective) nestedCanvas: NgFlowchartCanvasDirective;
 
-  @ViewChild(NgFlowchartCanvasDirective)
-  nestedCanvas: NgFlowchartCanvasDirective;
-
-  @ViewChild('canvasContent')
-  stepContent: ElementRef<HTMLElement>;
+  @ViewChild('canvasContent') stepContent: ElementRef<HTMLElement>;
 
   callbacks: NgFlowchart.Callbacks = {
     afterRender: () => {
@@ -51,7 +58,7 @@ export class NestedFlowComponent extends NgFlowchartStepComponent implements OnI
   }
 
   // add nested-alt class to alternate nested flows for better visibility
-  addAlternateClass(): void {  
+  addAlternateClass(): void {
     const parentCanvasWrapperClasses = (this.canvas.viewContainer.element.nativeElement as HTMLElement).parentElement.classList;
     if(parentCanvasWrapperClasses.contains('nested-flow-step') && !parentCanvasWrapperClasses.contains('nested-alt')){
       this.nativeElement.classList.add('nested-alt');
@@ -82,9 +89,9 @@ export class NestedFlowComponent extends NgFlowchartStepComponent implements OnI
     return true;
   }
 
-  
 
-  async onUpload(data: NestedData) { 
+
+  async onUpload(data: NestedData) {
     if(!this.nestedCanvas) {
       return
     }
