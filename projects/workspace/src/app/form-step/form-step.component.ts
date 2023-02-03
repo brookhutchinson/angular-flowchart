@@ -1,4 +1,7 @@
+// angular
 import { Component, OnInit } from '@angular/core';
+
+// components
 import { NgFlowchartStepComponent } from 'projects/ng-flowchart/src/lib/ng-flowchart-step/ng-flowchart-step.component';
 
 export type MyForm = {
@@ -11,15 +14,11 @@ export type MyForm = {
   styleUrls: ['./form-step.component.scss']
 })
 export class FormStepComponent extends NgFlowchartStepComponent<MyForm> implements OnInit {
-
-  constructor() { 
-    super()
+  constructor() {
+    super();
   }
 
-  ngOnInit(): void {
-    console.log(this.data)
+  ngOnInit() {
+    console.log(this.data);
   }
-
-  
-
 }

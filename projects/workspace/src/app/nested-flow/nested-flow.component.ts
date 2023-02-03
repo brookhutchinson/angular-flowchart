@@ -1,5 +1,15 @@
-import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { NgFlowchart, NgFlowchartCanvasDirective, NgFlowchartStepComponent } from 'projects/ng-flowchart/src';
+// angular
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { ElementRef, ViewChild } from '@angular/core';
+
+// components
+import { NgFlowchartStepComponent } from 'projects/ng-flowchart/src';
+
+// directives
+import { NgFlowchartCanvasDirective } from 'projects/ng-flowchart/src';
+
+// interfaaces
+import { NgFlowchart } from 'projects/ng-flowchart/src';
 
 export type NestedData = {
   nested: any
@@ -10,13 +20,9 @@ export type NestedData = {
   templateUrl: './nested-flow.component.html',
   styleUrls: ['./nested-flow.component.scss']
 })
-export class NestedFlowComponent extends NgFlowchartStepComponent implements OnInit, OnDestroy, AfterViewInit {
-
-  @ViewChild(NgFlowchartCanvasDirective)
-  nestedCanvas: NgFlowchartCanvasDirective;
-
-  @ViewChild('canvasContent')
-  stepContent: ElementRef<HTMLElement>;
+export class NestedFlowComponent extends NgFlowchartStepComponent implements OnInit, AfterViewInit, OnDestroy {
+  @ViewChild(NgFlowchartCanvasDirective) nestedCanvas: NgFlowchartCanvasDirective;
+  @ViewChild('canvasContent') stepContent: ElementRef<HTMLElement>;
 
   callbacks: NgFlowchart.Callbacks = {
     afterRender: () => {
@@ -32,39 +38,41 @@ export class NestedFlowComponent extends NgFlowchartStepComponent implements OnI
     }
   }
 
-
   constructor() {
     super();
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
     super.ngOnInit();
   }
 
-  ngAfterViewInit(): void {
+  ngAfterViewInit() {
     super.ngAfterViewInit();
     this.addAlternateClass();
   }
 
   ngOnDestroy() {
-    this.nestedCanvas?.getFlow().clear()
+    this.nestedCanvas?.getFlow().clear();
   }
 
   // add nested-alt class to alternate nested flows for better visibility
-  addAlternateClass(): void {  
+  addAlternateClass() {
     const parentCanvasWrapperClasses = (this.canvas.viewContainer.element.nativeElement as HTMLElement).parentElement.classList;
-    if(parentCanvasWrapperClasses.contains('nested-flow-step') && !parentCanvasWrapperClasses.contains('nested-alt')){
+
+    if (parentCanvasWrapperClasses.contains('nested-flow-step') && !parentCanvasWrapperClasses.contains('nested-alt')) {
       this.nativeElement.classList.add('nested-alt');
     }
   }
 
   shouldEvalDropHover(coords: number[], stepToDrop: NgFlowchart.Step): boolean {
-    const canvasRect = this.stepContent.nativeElement.getBoundingClientRect()
-    return !this.areCoordsInRect(coords, canvasRect)
+    const canvasRect = this.stepContent.nativeElement.getBoundingClientRect();
+
+    return !this.areCoordsInRect(coords, canvasRect);
   }
 
   toJSON() {
-    const json = super.toJSON()
+    const json = super.toJSON();
+
     return {
       ...json,
       data: {
@@ -82,12 +90,11 @@ export class NestedFlowComponent extends NgFlowchartStepComponent implements OnI
     return true;
   }
 
-  
-
-  async onUpload(data: NestedData) { 
-    if(!this.nestedCanvas) {
-      return
+  async onUpload(data: NestedData) {
+    if (!this.nestedCanvas) {
+      return;
     }
+
     await this.nestedCanvas.getFlow().upload(data.nested);
   }
 
@@ -96,7 +103,6 @@ export class NestedFlowComponent extends NgFlowchartStepComponent implements OnI
   }
 
   private isNumInRange(num: number, start: number, end: number): boolean {
-    return num >= start && num <= end
+    return num >= start && num <= end;
   }
-
 }

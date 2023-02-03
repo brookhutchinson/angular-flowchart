@@ -1,6 +1,6 @@
 .ngflowchart-canvas {
-  overflow: auto;
   display: flex;
+  overflow: auto;
 }
 
 .ngflowchart-canvas-content.scaling .ngflowchart-step-wrapper,
@@ -10,101 +10,103 @@
 
 .ngflowchart-canvas-content {
   position: relative;
+  flex: 1 1 100%;
   min-height: 100%;
   min-width: 100%;
-  flex: 1 1 100%;
 }
 
 .ngflowchart-step-wrapper {
-    height: auto;
-    width: auto;
-    position: absolute;
-    box-sizing: border-box;
-   
-    transition: all 0.2s;
-
-    cursor: grab;
+  position: absolute;
+  box-sizing: border-box;
+  cursor: grab;
+  height: auto;
+  transition: all 0.2s;
+  width: auto;
 }
 
 .ngflowchart-step-wrapper[ngflowchart-drop-hover]::before {
-    content: "";
-    width: 12px;
-    height: 12px;
-    border-radius: 100%;
-    position: absolute;
-    z-index: 1;
-    background: darkred;
+  position: absolute;
+  background: darkred;
+  border-radius: 100%;
+  content: "";
+  height: 12px;
+  width: 12px;
+  z-index: 1;
 }
 
 .ngflowchart-step-wrapper[ngflowchart-drop-hover]::after {
-    content: "";
-    width: 20px;
-    height: 20px;
-    border-radius: 100%;
-    position: absolute;
-    z-index: 0;
-    background: rgb(192, 123, 123);
-    //TODO mixin so theme can be set
-    animation: backgroundOpacity 2s linear infinite;
+  position: absolute;
+  animation: backgroundOpacity 2s linear infinite;
+  background: rgb(192, 123, 123);
+  border-radius: 100%;
+  content: "";
+  height: 20px;
+  width: 20px;
+  z-index: 0;
 }
 
 .ngflowchart-step-wrapper[ngflowchart-drop-hover="above"]::before,
 .ngflowchart-step-wrapper[ngflowchart-drop-hover="above"]::after {
-    top: 0;
-    right: 50%;
-    transform: translate(50%, -50%);
+  right: 50%;
+  top: 0;
+  transform: translate(50%, -50%);
 }
 
 .ngflowchart-step-wrapper[ngflowchart-drop-hover="below"]::before,
 .ngflowchart-step-wrapper[ngflowchart-drop-hover="below"]::after {
-    bottom: 0;
-    right: 50%;
-    transform: translate(50%, 50%);
+  bottom: 0;
+  right: 50%;
+  transform: translate(50%, 50%);
 }
 
 .ngflowchart-step-wrapper[ngflowchart-drop-hover="right"]::before,
 .ngflowchart-step-wrapper[ngflowchart-drop-hover="right"]::after {
-    right: 0;
-    top: 50%;
-    transform: translate(50%, -50%);
+  right: 0;
+  top: 50%;
+  transform: translate(50%, -50%);
 }
 
 .ngflowchart-step-wrapper[ngflowchart-drop-hover="left"]::before,
 .ngflowchart-step-wrapper[ngflowchart-drop-hover="left"]::after {
-    left: 0;
-    top: 50%;
-    transform: translate(-50%, -50%);
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 @keyframes wiggle {
-    0% {
-      transform: translateX(0);
-      border: 2px solid red;
-    }
-    25% {
-      transform: translateX(-10px);
-    }
-    50% {
-      transform: translateX(0);
-    }
-    75% {
-      transform: translateX(10px);
-    }
-    100% {
-      transform: translateX(0);
-      border: 2px solid red;
-    }
+  0% {
+    border: 2px solid #F00;
+    transform: translateX(0);
   }
-  
-  @keyframes backgroundOpacity {
-    0% {
-      opacity: .8
-    }
-    50% {
-      opacity: .3
-    }
-    100% {
-      opacity: .8
-    }
+
+  25% {
+    transform: translateX(-10px);
   }
-  
+
+  50% {
+    transform: translateX(0);
+  }
+
+  75% {
+    transform: translateX(10px);
+  }
+
+  100% {
+    border: 2px solid #F00;
+    transform: translateX(0);
+  }
+}
+
+@keyframes backgroundOpacity {
+  0% {
+    opacity: .8
+  }
+
+  50% {
+    opacity: .3
+  }
+
+  100% {
+    opacity: .8
+  }
+}

@@ -1,11 +1,10 @@
 .route {
-    height: 75px;
-    width: 125px;
-    background: #444;
-    color: white;
-    border-radius: 4px;
-    padding: .8em;
-
-    display: grid;
-    place-items: center;
+  display: grid;
+  background: #444;
+  border-radius: 4px;
+  color: #FFF;
+  height: 75px;
+  padding: .8em;
+  place-items: center;
+  width: 125px;
 }
