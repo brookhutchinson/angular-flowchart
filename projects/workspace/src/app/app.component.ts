@@ -88,9 +88,7 @@ export class AppComponent {
 
   disabled = false;
 
-  constructor(
-    private stepRegistry: NgFlowchartStepRegistry
-  ) {
+  constructor(private stepRegistry: NgFlowchartStepRegistry) {
     this.callbacks.onDropError = this.onDropError;
     this.callbacks.onMoveError = this.onMoveError;
     this.callbacks.afterDeleteStep = this.afterDeleteStep;
