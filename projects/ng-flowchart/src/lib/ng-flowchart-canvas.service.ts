@@ -212,9 +212,7 @@ export class NgFlowchartCanvasService {
         this.moveError(step, this.noParentError);
       }
 
-      if (
-        this.options.callbacks?.onDropStep && (this.currentDropTarget || step.isRootElement());
-      ) {
+      if (this.options.callbacks?.onDropStep && (this.currentDropTarget || step.isRootElement())) {
         this.options.callbacks.onDropStep({
           isMove: true,
           step: step,
