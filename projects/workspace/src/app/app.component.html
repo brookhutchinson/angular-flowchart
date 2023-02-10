@@ -1,6 +1,4 @@
 <main>
-  <div id="canvas" ngFlowchartCanvas [disabled]="disabled" [ngFlowchartCallbacks]="callbacks" [ngFlowchartOptions]="options"></div>
-
   <div id="palette">
     <section>
       <div *ngFor="let item of items" class="plugin-op" [ngFlowchartStep]="{ template: normalStep, type: item.type, data: item.data }">
@@ -48,4 +46,6 @@
       </div>
     </ng-template>
   </div>
+
+  <div id="canvas" ngFlowchartCanvas [disabled]="disabled" [ngFlowchartCallbacks]="callbacks" [ngFlowchartOptions]="options"></div>
 </main>
